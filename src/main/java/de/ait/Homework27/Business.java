@@ -100,7 +100,6 @@ public class Business {
         double totalSalaryBusiness = 0;
         if (departments.isEmpty()) {
             log.warn("No departments found");
-            System.out.println("No departments found");
             return totalSalaryBusiness;
         } else {
             for (Department department : departments.values()) {
