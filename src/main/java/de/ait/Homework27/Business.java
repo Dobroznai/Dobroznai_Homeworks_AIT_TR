@@ -46,20 +46,19 @@ public class Business {
     public void addDepartment(Department department) {
         if (department == null) {
             log.error("Department is null");
-        }
-        else if (departments.containsKey(department.getName())) {
+        } else if (departments.containsKey(department.getName())) {
             log.warn("Department {} already exists", department.getName());
+        } else {
+            departments.put(department.getName(), department);
+            log.info("Department {} added successfully", department.getName());
         }
-        departments.put(department.getName(), department);
-        log.info("Department {} added successfully", department.getName());
     }
 
     //удаляет отдел по его названию.
     public void removeDepartment(String departmentName) {
         if (departmentName == null || departmentName.isEmpty()) {
             log.error("Department name is null or empty");
-        }
-        else if (departments.remove(departmentName) != null) {
+        } else if (departments.remove(departmentName) != null) {
             log.info("Department {} removed successfully", departmentName);
         } else {
             log.warn("Department {} not found", departmentName);
@@ -71,12 +70,14 @@ public class Business {
     public Department getDepartment(String departmentName) {
         if (departmentName == null || departmentName.isEmpty()) {
             log.error("Department name is null or empty");
+            return null; // Завершаем выполнение, если имя некорректно
+        } else {
+            Department department = departments.get(departmentName);
+            if (department == null) {
+                log.warn("Department {} not found", departmentName);
+            }
+            return department;
         }
-        Department department = departments.get(departmentName);
-        if (department == null) {
-            log.warn("Department {} not found", departmentName);
-        }
-        return department;
     }
 
     public HashMap<String, Department> getDepartments() {
@@ -101,11 +102,12 @@ public class Business {
             log.warn("No departments found");
             System.out.println("No departments found");
             return totalSalaryBusiness;
+        } else {
+            for (Department department : departments.values()) {
+                totalSalaryBusiness += department.getTotalSalary();
+            }
+            return totalSalaryBusiness;
         }
-        for (Department department : departments.values()) {
-            totalSalaryBusiness += department.getTotalSalary();
-        }
-        return totalSalaryBusiness;
     }
 }
 
