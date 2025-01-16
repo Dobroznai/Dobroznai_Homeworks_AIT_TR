@@ -47,7 +47,7 @@ public class Business {
         if (department == null) {
             log.error("Department is null");
         }
-        if (departments.containsKey(department.getName())) {
+        else if (departments.containsKey(department.getName())) {
             log.warn("Department {} already exists", department.getName());
         }
         departments.put(department.getName(), department);
@@ -59,7 +59,7 @@ public class Business {
         if (departmentName == null || departmentName.isEmpty()) {
             log.error("Department name is null or empty");
         }
-        if (departments.remove(departmentName) != null) {
+        else if (departments.remove(departmentName) != null) {
             log.info("Department {} removed successfully", departmentName);
         } else {
             log.warn("Department {} not found", departmentName);
