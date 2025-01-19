@@ -31,7 +31,8 @@ import java.util.ArrayList;
 public class Department {
     @NonNull
     private String name;
-    @Builder.Default //Эта аннотация позволяет указать значение по умолчанию для полей, чтобы они не оставались null при использовании билдера.
+    @Builder.Default
+    //Эта аннотация позволяет указать значение по умолчанию для полей, чтобы они не оставались null при использовании билдера.
     private ArrayList<Employee> employees = new ArrayList<>();
 
     public Department(@NonNull String name) {
@@ -43,13 +44,13 @@ public class Department {
     public void addEmployee(Employee employee) {
         if (employee == null) {
             log.error("Employee is null");
-        }
-        if (employee.getId() == null || employee.getName() == null || employee.getName().isEmpty()
+        } else if (employee.getId() == null || employee.getName() == null || employee.getName().isEmpty()
                 || employee.getPosition() == null || employee.getSalary() <= 0) {
             log.error("Employee is invalid: {}", employee);
+        } else {
+            employees.add(employee);
+            log.info("Employee with ID {} was added", employee.getId());
         }
-        employees.add(employee);
-        log.info("Employee with ID {} was added", employee.getId());
     }
 
     // удаляет сотрудника по его ID.
