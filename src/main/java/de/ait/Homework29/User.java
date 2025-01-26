@@ -1,8 +1,12 @@
 package de.ait.Homework29;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Slf4j
 public class User {
 
     private String id;
@@ -43,8 +47,10 @@ public class User {
         if (user != null) {
             friends.add(user);
             System.out.println("Friend added: " + user.name);
+            log.info("Friend added: " + user.name);
         } else {
             System.out.println("Friend is not valid or already added!");
+            log.warn("Friend is not valid or already added!");
         }
     }
 
@@ -52,8 +58,10 @@ public class User {
         if (user != null && friends.contains(user)) {
             friends.remove(user);
             System.out.println("Friend removed: " + user.name);
+            log.info("Friend removed: " + user.name);
         } else {
             System.out.println("Friend not found or invalid!");
+            log.warn("Friend not found or invalid!");
         }
     }
 
@@ -68,8 +76,10 @@ public class User {
         } else {
             Post post = new Post(this, content);
             System.out.println("Post was created: " + content + " by " + name);
+            log.info("Post was created: " + content + " by " + name);
             posts.add(post);
             return post;
+
         }
     }
 
@@ -82,6 +92,9 @@ public class User {
             List<Post> friendPosts = user.getPosts();
             for (final Post post : friendPosts) {
                 System.out.println("Author " + post.getAuthor().getName() +
+                        " Post: " + post.getContent() +
+                        " Likes " + post.getLikes());
+                log.info("Author " + post.getAuthor().getName() +
                         " Post: " + post.getContent() +
                         " Likes " + post.getLikes());
             }

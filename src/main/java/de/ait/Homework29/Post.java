@@ -1,5 +1,8 @@
 package de.ait.Homework29;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class Post {
 
     private User author;
@@ -27,5 +30,7 @@ public class Post {
 
     void like() {
         likes++;
+        log.info("add like: " + likes);
+
     }
 }
