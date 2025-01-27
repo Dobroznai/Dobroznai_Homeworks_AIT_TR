@@ -15,6 +15,8 @@ public class SocialMediaManager {
             premiumUserPost.like();
         }
         premiumUser.printInfo();
+        // проверка на подписку
+        System.out.println("Is subscription active: " + premiumUser.isSubscriptionActive());
 
 
         AdminUser adminUser = new AdminUser("002", "Admin", "admin@gmail.com");
@@ -42,9 +44,16 @@ public class SocialMediaManager {
         postDavid.like();
         userDavid.printInfo();
 
+        // проверка на подписку и принадлежность к premiumUser
+        if (userDavid instanceof PremiumUser) {
+            PremiumUser premiumDavid = (PremiumUser) userDavid;
+            System.out.println("Is subscription active: " + premiumDavid.isSubscriptionActive());
+        }
+
         User userArmin = new AdminUser("01B", " Armin", " armin@example.com ");
         userArmin.addFriend(userDavid);
         userArmin.viewFriendsPosts();
         userArmin.printInfo();
+
     }
 }
